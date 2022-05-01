@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {
   // be sure to include its associated Category and Tag data
   Product.findOne({
     where: {
-      product_id: req.params.id
+      id: req.params.id
     },
     include: [
       {
@@ -139,7 +139,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   Product.destroy({
     where: {
-      product_id: req.params.id
+      id: req.params.id
     }
   })
     .then(dbProductData => {
