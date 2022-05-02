@@ -16,7 +16,7 @@
   - First Step: Clone, fork, or download the repo found at: [Repo](https://github.com/cory-hall/e-commerce-u-commerce)<br>
   - Second Step: In the console, to make sure all node modules are installed, type 
   `npm init` followed by `npm i` to install all modules<br>
-  - Third Step: create a `.env` file in the root of the directory, and add in    `DB_NAME='ecommerce_db'`, `DB_USER='root'`, `DB_PW=(your mysql password)`
+  - Third Step: create a `.env` file in the root of the directory, and add in    `DB_NAME='ecommerce_db'`, `DB_USER=(your mysql username) or 'root'`, `DB_PW=(your mysql password)`
   - Fourth Step: Type `mysql -u root -p` followed by your password. Once you're in MySQL, type `source db/schema.sql;` to create the database.
 
   From here, you are free to add your own data to the database. If you wish to use pre-seeded data, all you need to do is type `npm run seed` to seed the tables.
