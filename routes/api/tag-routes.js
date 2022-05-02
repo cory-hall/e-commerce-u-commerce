@@ -3,16 +3,19 @@ const { Tag, Product, ProductTag } = require('../../models');
 
 // The `/api/tags` endpoint
 
+// GET all Tags, and their associated Products data
 router.get('/', (req, res) => {
-  // find all tags
-  // be sure to include its associated Product data
   Tag.findAll({
+    // include Products
     include: [Product]
   })
     .then(dbTagData => {
+      // if there is no data
       if (!dbTagData) {
+        // respond with 404
         res.status(404).json({ message: 'No tags found.' });
       }
+      // send the data
       res.json(dbTagData)
     })
     .catch(err => {
@@ -21,19 +24,23 @@ router.get('/', (req, res) => {
     });
 });
 
+// GET one Tag based on `id` value, and it's associated Products data
 router.get('/:id', (req, res) => {
-  // find a single tag by its `id`
-  // be sure to include its associated Product data
   Tag.findAll({
+    // find which Tag based on `id` value
     where: {
       id: req.params.id
     },
+    // include Products
     include: [Product]
   })
     .then(dbTagData => {
+      // if there is no data
       if (!dbTagData) {
+        // respond with 404
         res.status(404).json({ message: 'No tags found.' });
       }
+      // send the data
       res.json(dbTagData)
     })
     .catch(err => {
@@ -43,15 +50,19 @@ router.get('/:id', (req, res) => {
 
 });
 
+// POST (create) a new Tag
 router.post('/', (req, res) => {
-  // create a new tag
   Tag.create({
+    // name for new Tag
     tag_name: req.body.tag_name
   })
     .then(dbTagData => {
+      // if there is no data
       if (!dbTagData) {
+        // respond with 404
         res.status(404).json({ message: 'Unable to create this tag.' });
       }
+      // send the data
       res.json(dbTagData)
     })
     .catch(err => {
@@ -60,22 +71,27 @@ router.post('/', (req, res) => {
     });
 });
 
+// PUT (update) a Tag name based on `id` value
 router.put('/:id', (req, res) => {
-  // update a tag's name by its `id` value
   Tag.update(
     {
+      // new name for the existing Tag
       tag_name: req.body.tag_name
     },
     {
+      // find what Tag to rename based on `id` value
       where: {
         id: req.params.id
       }
     }
   )
     .then(dbTagData => {
+      // if there is no data
       if (!dbTagData) {
+        // respond with 404
         res.status(404).json({ message: 'Unable to locate a tag with this id.' });
       }
+      // send the data
       res.json(dbTagData);
     })
     .catch(err => {
@@ -84,16 +100,21 @@ router.put('/:id', (req, res) => {
     });
 });
 
+// DELETE a Tag based on `id` value
 router.delete('/:id', (req, res) => {
   Tag.destroy({
+    // find which Tag to delete, based on `id` value
     where: {
       id: req.params.id
     }
   })
   .then(dbTagData => {
+    // if there is no data
     if (!dbTagData) {
+      // respond with 404
       res.status(404).json({ message: 'Unable to locate a tag with this id.' });
     }
+    // send the data
     res.json(dbTagData)
   })
     .catch(err => {

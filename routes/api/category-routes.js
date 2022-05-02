@@ -3,17 +3,20 @@ const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
 
+// GET all Categories and their associated Products data
 router.get('/', (req, res) => {
-  // find all categories
-  // be sure to include its associated Products
   Category.findAll({
+    // include Product table
     include: [Product]
   })
     .then(dbCategoryData => {
+      // if there is no data
       if (!dbCategoryData) {
-        res.status(404).json({ message: 'No categories found.' })
+        // respond with 404
+        res.status(404).json({ message: 'No categories found.' });
       }
-      res.json(dbCategoryData)
+      // send data
+      res.json(dbCategoryData);
     })
     .catch(err => {
       console.log(err);
@@ -21,19 +24,23 @@ router.get('/', (req, res) => {
     })
 });
 
+// GET a Category based on `id` value, and it's associated Products data
 router.get('/:id', (req, res) => {
-  // find one category by its `id` value
-  // be sure to include its associated Products
   Category.findOne({
     where: {
+      // find the right Category based on `id` value
       id: req.params.id
     },
+    // include Product table
     include: [Product]
   })
     .then(dbCategoryData => {
+      // if there is no data
       if (!dbCategoryData) {
+        // respond with 404
         res.status(404).json({ message: 'No category found with this id.' })
       }
+      // send the data
       res.json(dbCategoryData)
     })
     .catch(err => {
@@ -42,15 +49,19 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// POST (create) a new Category
 router.post('/', (req, res) => {
-  // create a new category
   Category.create({
+    // get name for new Category
     category_name: req.body.category_name
   })
     .then(dbCategoryData => {
+      // if there is no data
       if (!dbCategoryData) {
+        // respond with 404
         res.status(404).json({ message: 'Unable to create this category.' });
       }
+      // send the new data
       res.json(dbCategoryData);
     })
     .catch(err => {
@@ -59,21 +70,26 @@ router.post('/', (req, res) => {
     })
 });
 
+// PUT (update) a Category based on `id` value
 router.put('/:id', (req, res) => {
-  // update a category by its `id` value
   Category.update(
+    // get new name for existing Category
     {
       category_name: req.body.category_name
     },
     {
+      // find which Category to rename based on `id` value
       where: {
         id: req.params.id
       }
     })
     .then(dbCategoryData => {
+      // if there is no data
       if (!dbCategoryData) {
+        // respond with 404
         res.status(404).json({ message: 'No category found with this id.' });
       }
+      // send the new data
       res.json(dbCategoryData);
     })
     .catch(err => {
@@ -82,17 +98,21 @@ router.put('/:id', (req, res) => {
     });
 });
 
+// DELETE a Category based on `id` value
 router.delete('/:id', (req, res) => {
-  // delete a category by its `id` value
   Category.destroy({
     where: {
+      // find which Category to delete based on `id` value
       id: req.params.id
     }
   })
     .then(dbCategoryData => {
+      // if there is no data
       if (!dbCategoryData) {
+        // respond with 404
         res.status(404).json({ message: 'No category found with this id.' });
       }
+      // send the data
       res.json(dbCategoryData)
     })
     .catch(err => {

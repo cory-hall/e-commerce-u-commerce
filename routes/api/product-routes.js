@@ -3,11 +3,10 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
 
-// get all products
+// GET all Products, and their associated Category and Tag data
 router.get('/', (req, res) => {
-  // find all products
-  // be sure to include its associated Category and Tag data
   Product.findAll({
+    // include Category and Tag tables
     include: [
       {
         model: Category,
@@ -20,9 +19,12 @@ router.get('/', (req, res) => {
     ]
   })
     .then(dbProductData => {
+      // if there is no data
       if (!dbProductData) {
+        // respond with 404
         res.status(404).json({ message: 'No products found.' });
       }
+      // send the data
       res.json(dbProductData)
     })
     .catch(err => {
@@ -31,14 +33,14 @@ router.get('/', (req, res) => {
     });
 });
 
-// get one product
+// GET one Product based on `id` value, and it's associated Category and Tag data
 router.get('/:id', (req, res) => {
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
   Product.findOne({
+    // find which Product based on `id` value
     where: {
       id: req.params.id
     },
+    // include Category and Tag tables
     include: [
       {
         model: Category,
@@ -51,9 +53,12 @@ router.get('/:id', (req, res) => {
     ]
   })
     .then(dbProductData => {
+      // if there is no data
       if (!dbProductData) {
+        // respond with 404
         res.status(404).json({ message: 'No product found with this id.' });
       }
+      // send the data
       res.json(dbProductData)
     })
     .catch(err => {
@@ -62,7 +67,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// create new product
+// POST (create) a new Product
 router.post('/', (req, res) => {
   /* req.body should look like this...
     {
@@ -136,16 +141,21 @@ router.put('/:id', (req, res) => {
     });
 });
 
+// DELETE a product based on `id` value
 router.delete('/:id', (req, res) => {
   Product.destroy({
+    // find which Product based on `id` value
     where: {
       id: req.params.id
     }
   })
     .then(dbProductData => {
+      // if there is no data
       if (!dbProductData) {
+        // respond with 404
         res.status(404).json({ message: 'No product found with this id.' });
       }
+      // send the data
       res.json(dbProductData)
     })
     .catch(err => {
