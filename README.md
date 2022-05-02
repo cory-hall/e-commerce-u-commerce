@@ -24,7 +24,9 @@
   When it's all all set up, run the app by typing `npm start` to start the server and test your endpoints within insomnia or similar software.
   
   ## Usage
-  This app is designed purely for back-end use. There is no front end to see the different functionality, but you can see the different api end points through localhost within your browser or through insomnia or similar software that allows api testing.
+  This app is designed purely for back-end use. There is no front end to see the different functionality, but you can see the different api end points through localhost within your browser or through insomnia or similar software that allows api testing.<br>
+
+  Follow this [video](https://drive.google.com/file/d/1LV9njIsaD-DF4MLPuX665XeNVJXxe8xM/view) for full usage example.
 
   All API endpoints start at localhost:3001 by default.
 
