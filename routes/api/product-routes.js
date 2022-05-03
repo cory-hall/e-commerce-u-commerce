@@ -23,6 +23,7 @@ router.get('/', (req, res) => {
       if (!dbProductData) {
         // respond with 404
         res.status(404).json({ message: 'No products found.' });
+        return;
       }
       // send the data
       res.json(dbProductData)
@@ -57,6 +58,7 @@ router.get('/:id', (req, res) => {
       if (!dbProductData) {
         // respond with 404
         res.status(404).json({ message: 'No product found with this id.' });
+        return;
       }
       // send the data
       res.json(dbProductData)
@@ -154,6 +156,7 @@ router.delete('/:id', (req, res) => {
       if (!dbProductData) {
         // respond with 404
         res.status(404).json({ message: 'No product found with this id.' });
+        return;
       }
       // send the data
       res.json(dbProductData)

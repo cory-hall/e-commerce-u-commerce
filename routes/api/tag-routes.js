@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
       if (!dbTagData) {
         // respond with 404
         res.status(404).json({ message: 'No tags found.' });
+        return;
       }
       // send the data
       res.json(dbTagData)
@@ -39,6 +40,7 @@ router.get('/:id', (req, res) => {
       if (!dbTagData) {
         // respond with 404
         res.status(404).json({ message: 'No tags found.' });
+        return;
       }
       // send the data
       res.json(dbTagData)
@@ -61,6 +63,7 @@ router.post('/', (req, res) => {
       if (!dbTagData) {
         // respond with 404
         res.status(404).json({ message: 'Unable to create this tag.' });
+        return;
       }
       // send the data
       res.json(dbTagData)
@@ -90,6 +93,7 @@ router.put('/:id', (req, res) => {
       if (!dbTagData) {
         // respond with 404
         res.status(404).json({ message: 'Unable to locate a tag with this id.' });
+        return;
       }
       // send the data
       res.json(dbTagData);
@@ -113,6 +117,7 @@ router.delete('/:id', (req, res) => {
     if (!dbTagData) {
       // respond with 404
       res.status(404).json({ message: 'Unable to locate a tag with this id.' });
+      return;
     }
     // send the data
     res.json(dbTagData)

@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
       if (!dbCategoryData) {
         // respond with 404
         res.status(404).json({ message: 'No categories found.' });
+        return;
       }
       // send data
       res.json(dbCategoryData);
@@ -38,7 +39,8 @@ router.get('/:id', (req, res) => {
       // if there is no data
       if (!dbCategoryData) {
         // respond with 404
-        res.status(404).json({ message: 'No category found with this id.' })
+        res.status(404).json({ message: 'No category found with this id.' });
+        return;
       }
       // send the data
       res.json(dbCategoryData)
@@ -60,6 +62,7 @@ router.post('/', (req, res) => {
       if (!dbCategoryData) {
         // respond with 404
         res.status(404).json({ message: 'Unable to create this category.' });
+        return;
       }
       // send the new data
       res.json(dbCategoryData);
@@ -88,6 +91,7 @@ router.put('/:id', (req, res) => {
       if (!dbCategoryData) {
         // respond with 404
         res.status(404).json({ message: 'No category found with this id.' });
+        return;
       }
       // send the new data
       res.json(dbCategoryData);
@@ -111,6 +115,7 @@ router.delete('/:id', (req, res) => {
       if (!dbCategoryData) {
         // respond with 404
         res.status(404).json({ message: 'No category found with this id.' });
+        return;
       }
       // send the data
       res.json(dbCategoryData)
